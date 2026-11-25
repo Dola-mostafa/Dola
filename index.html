@@ -193,13 +193,13 @@ function showTyping(){ let t=document.createElement('div'); t.className='typing'
 function removeTyping(){ let t=document.getElementById('typing'); if(t) t.remove(); }
 function getFriendAnswer(q){
   let l=q.toLowerCase();
+  if(l.includes('عادل') || l.includes('adel') || l.includes('dola') || l.includes('دولا')) return 'عادل ده ملك الملوك 👑🔥 هو اللي عامل الموقع ده، وهو اللي عملني DOLA AI PRO 💜 رقمه 01062056341 كلمه واتساب https://wa.me/201062056341';
   if(l.includes('سلام')) return 'وعليكم السلام ورحمة الله يا '+myName+' 👑🔥 نورّت والله، عامل ايه؟';
   if(l.includes('ازيك')||l.includes('عامل ايه')) return 'انا زي الفل طول ما انت بخير يا '+myName+' 😎💜 انت عامل ايه؟';
   if(l.includes('صباح')) return 'صباح الفل يا '+myName+' ☀️💜 يومك هيبقى جامد النهارده 👑';
   if(l.includes('مساء')||l.includes('مسا')) return 'مساء الجمال يا '+myName+' 🌙💜 عامل ايه؟';
   if(l.includes('اغاني')||l.includes('الاغاني')) return '🕌 بص يا صاحبي، الأغاني فيها اختلاف بين العلماء:\n- جمهور العلماء قالوا ان الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام.\n- وفيه علماء قالوا ان الأغاني الهادية اللي كلامها نضيف عادي.\nنصيحتي: لو بتضيع وقتك وبتبعدك عن الصلاة ابعد عنها، واسمع قرآن هترتاح أكتر 💜';
   if(l.includes('فري فاير')&& (l.includes('حرام')||l.includes('حلال'))) return '🎮 فري فاير نفسها مش حرام، دي لعبة.\nتبقى حرام لو بتضيع صلاتك، أو بتشتم الناس، أو سايب مذاكرتك بسببها.\nالعبها ساعة للمتعة وصلي صلاتك وتبقى حلال يا بطل 👑';
-  if(l.includes('مين عادل')) return 'عادل ده ملك الملوك 👑🔥 صاحب الموقع ده، رقمه 01062056341 https://wa.me/201062056341';
   if(l.includes('عبد الحليم') || l.includes('عبدالحليم') || l.includes('حليم')) return 'عبد الحليم ده صاحبنا الجدع 😂 مسمي نفسه الملك، بس أهم حاجة فيه انه متواضع أوي ومبيحبش التكبر خالص، ومبيسيبش فرض خالص، وجدع وراجل مع صحابه كلهم، والعيال كلها بتحبه وبتحب تهزر معاه 😂';
   if(l.includes('انت مين')) return 'انا Dola AI PRO 💜 صاحبك الأنتيم، اللي عملني عادل الملك 👑';
   if(l.includes('نكتة')) return 'اسمع دي 😂 واحد محشش قاله صاحبه انت فين؟ قاله في البيت، قاله طب تعالا، قاله ما انا في البيت 😂😂';
@@ -216,14 +216,4 @@ async function askAIExplain(){ let v=document.getElementById('calcInput').value;
 async function doTranslate(){ let t=document.getElementById('transText').value.trim(); if(!t) return; document.getElementById('transResult').textContent='بترجم... ⏳'; let lang=document.getElementById('transLang').value; let names={en:'الانجليزية',fr:'الفرنسية',es:'الاسبانية',de:'الألمانية',ar:'العربية',it:'الايطالية',tr:'التركية'}; let ans=await askAI('ترجم النص ده للغة '+names[lang]+' بس: '+t); document.getElementById('transResult').textContent='🌍 '+ans; }
 function quickMake(t){ show('makeTab',document.querySelectorAll('.tab')[4]); document.getElementById('makeText').value=t; doMake(); }
 async function doMake(){ let t=document.getElementById('makeText').value.trim(); if(!t) return; document.getElementById('makeResult').textContent='بعملهولك يا صاحبي... ⏳✨'; let ans=await askAI('انت Dola AI PRO، اعمل اللي المستخدم طلبه ده بالعربي المصري فقط، ممنوع انجليزي: '+t); document.getElementById('makeResult').textContent=ans.slice(0,2000); }
-function quickImg(t){ show('imgTab',document.querySelectorAll('.tab')[1]); document.getElementById('imgText').value=t; doImg(); }
-async function doImg(){ let t=document.getElementById('imgText').value.trim(); if(!t) return; document.getElementById('imgResult').innerHTML='بعمل الصورة... ⏳🎨<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(t+', high quality, beautiful')+'?width=512&height=512&nologo=true" style="width:100%;border-radius:12px;margin-top:8px">'; }
-let board=['','','','','','','','',''], over=false;
-function renderGame(){ let g=document.getElementById('game'); g.innerHTML=''; board.forEach((v,i)=>{ let b=document.createElement('button'); b.textContent=v; b.onclick=()=>play(i); g.appendChild(b); }); }
-function play(i){ if(board[i]||over) return; board[i]='X'; check(); if(!over){ let empty=board.map((v,idx)=>v==='' ? idx : -1).filter(v=>v!==-1); if(empty.length){ let r=empty[Math.floor(Math.random()*empty.length)]; board[r]='O'; check(); } } renderGame(); }
-function check(){ let w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; for(let c of w){ if(board[c[0]]&&board[c[0]]===board[c[1]]&&board[c[1]]===board[c[2]]){ document.getElementById('gameStatus').textContent= board[c[0]]==='X' ? 'كسبت يا بطل! 👑🔥' : 'DOLA كسبك 😅'; over=true; return; } } if(!board.includes('')){ document.getElementById('gameStatus').textContent='تعادل يا صاحبي 🤝'; over=true; } }
-function resetGame(){ board=['','','','','','','','','']; over=false; document.getElementById('gameStatus').textContent='دورك يا صاحبي - انت X'; renderGame(); }
-renderGame();
-</script>
-</body>
-</html>
+function quickImg(t){ show('imgTab',document.qu
