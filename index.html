@@ -47,11 +47,10 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 .grid button.op{background:#a855f7}
 .result{background:#000;border:1px dashed #a855f7;border-radius:12px;padding:12px;margin-top:10px;font-size:15px;line-height:1.7;white-space:pre-wrap;min-height:50px}
 .result img{width:100%;border-radius:12px;margin-top:8px}
-.bottom{position:fixed !important;bottom:14px !important;left:10px !important;right:10px !important;z-index:999 !important;display:flex;gap:6px;align-items:center;padding:8px;background:#111 !important;border:1px solid #a855f7 !important;border-radius:28px !important;box-shadow:0 0 25px rgba(168,85,247,.6) !important;max-width:700px;margin:0 auto}
-.bottom input{flex:1;padding:14px 16px;border-radius:22px;border:none;background:#1a1a1a;color:#fff;outline:none;font-size:15px;min-width:0}
-.iconBtn{width:48px;height:48px;border-radius:50%;border:none;background:#222;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
-.iconBtn.active{background:#ef4444}
-.btn2{width:50px;height:50px;border-radius:50%;border:none;background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;font-size:22px;cursor:pointer;flex-shrink:0}
+.bottom{position:fixed !important;bottom:10px !important;left:8px !important;right:8px !important;z-index:9999 !important;display:flex !important;gap:8px;align-items:center;padding:6px;background:#111 !important;border:1px solid #a855f7 !important;border-radius:30px !important;box-shadow:0 0 25px rgba(168,85,247,.6) !important;max-width:700px;margin:0 auto}
+.bottom input{flex:1 !important;padding:14px 12px;border-radius:22px;border:none;background:#1a1a1a;color:#fff;outline:none;font-size:15px;min-width:0}
+.iconBtn{width:46px;height:46px;border-radius:50%;border:none;background:#222;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
+.btn2{width:52px !important;height:52px !important;min-width:52px !important;border-radius:50%;border:none;background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;font-size:24px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .game{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:12px auto}
 .game button{aspect-ratio:1;border-radius:14px;border:1px solid #a855f7;background:#111;color:#fff;font-size:32px;font-weight:900;cursor:pointer}
 .footer{text-align:center;font-size:11px;color:#666;padding:10px}
@@ -141,7 +140,6 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 <div class="bottom" id="bottomBar">
 <button class="iconBtn" id="micBtn" onclick="startVoice()">🎤</button>
 <input id="input" placeholder="اسألني عن أي حاجة انت عايزها..." onkeydown="if(event.key==='Enter') sendMsg()">
-<button class="iconBtn" onclick="askMe('ارسم لي صورة بطل خارق')">🎨</button>
 <button class="btn2" onclick="sendMsg()">➤</button>
 </div>
 
@@ -219,4 +217,13 @@ async function doTranslate(){ let t=document.getElementById('transText').value.t
 function quickMake(t){ show('makeTab',document.querySelectorAll('.tab')[4]); document.getElementById('makeText').value=t; doMake(); }
 async function doMake(){ let t=document.getElementById('makeText').value.trim(); if(!t) return; document.getElementById('makeResult').textContent='بعملهولك يا صاحبي... ⏳✨'; let ans=await askAI('انت Dola AI PRO، اعمل اللي المستخدم طلبه ده بالعربي المصري فقط، ممنوع انجليزي: '+t); document.getElementById('makeResult').textContent=ans.slice(0,2000); }
 function quickImg(t){ show('imgTab',document.querySelectorAll('.tab')[1]); document.getElementById('imgText').value=t; doImg(); }
-async function doImg(){ let t=document.g
+async function doImg(){ let t=document.getElementById('imgText').value.trim(); if(!t) return; document.getElementById('imgResult').innerHTML='بعمل الصورة... ⏳🎨<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(t+', high quality, beautiful')+'?width=512&height=512&nologo=true" style="width:100%;border-radius:12px;margin-top:8px">'; }
+let board=['','','','','','','','',''], over=false;
+function renderGame(){ let g=document.getElementById('game'); g.innerHTML=''; board.forEach((v,i)=>{ let b=document.createElement('button'); b.textContent=v; b.onclick=()=>play(i); g.appendChild(b); }); }
+function play(i){ if(board[i]||over) return; board[i]='X'; check(); if(!over){ let empty=board.map((v,idx)=>v==='' ? idx : -1).filter(v=>v!==-1); if(empty.length){ let r=empty[Math.floor(Math.random()*empty.length)]; board[r]='O'; check(); } } renderGame(); }
+function check(){ let w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; for(let c of w){ if(board[c[0]]&&board[c[0]]===board[c[1]]&&board[c[1]]===board[c[2]]){ document.getElementById('gameStatus').textContent= board[c[0]]==='X' ? 'كسبت يا بطل! 👑🔥' : 'DOLA كسبك 😅'; over=true; return; } } if(!board.includes('')){ document.getElementById('gameStatus').textContent='تعادل يا صاحبي 🤝'; over=true; } }
+function resetGame(){ board=['','','','','','','','','']; over=false; document.getElementById('gameStatus').textContent='دورك يا صاحبي - انت X'; renderGame(); }
+renderGame();
+</script>
+</body>
+</html>
