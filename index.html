@@ -2,241 +2,157 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>DOLA AI PRO | صاحبك</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOLA AI PRO</title>
 <style>
-*{box-sizing:border-box;-webkit-touch-callout:default !important;user-select:text !important}
-html,body{height:100dvh !important;margin:0;overflow:hidden}
-body{font-family:'Segoe UI',Arial;background:#050005;color:#fff;display:flex;flex-direction:column}
-.top{padding:12px 16px;display:flex;align-items:center;gap:12px;background:#000;border-bottom:1px solid #a855f7;flex-shrink:0}
-.avatar{width:48px;height:48px;border-radius:50%;background:#000;border:2px solid #a855f7;color:#a855f7;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;box-shadow:0 0 20px #a855f7;flex-shrink:0}
-.top h1{font-size:19px;margin:0}.top h1 span{color:#a855f7}
-.top p{font-size:11px;color:#aaa;margin:0}
-.online{width:10px;height:10px;background:#a855f7;border-radius:50%;box-shadow:0 0 10px #a855f7;flex-shrink:0}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#0a0a0a;flex-shrink:0;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{white-space:nowrap;padding:10px 16px;border-radius:20px;border:1px solid #333;background:#111;color:#fff;cursor:pointer;font-weight:700;font-size:13px}
-.tab.active{background:linear-gradient(90deg,#a855f7,#ec4899);border-color:#a855f7}
-.section{display:none;padding:0;margin:0;width:100%;flex:1;overflow:hidden;flex-direction:column}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#050005;color:#fff;display:flex;flex-direction:column;height:100dvh}
+.top{padding:12px;display:flex;gap:10px;align-items:center;background:#000;border-bottom:2px solid #a855f7}
+.top b{font-size:20px}.top b span{color:#a855f7}
+.tabs{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#0a0a0a}
+.tabs button{white-space:nowrap;padding:10px 14px;border-radius:20px;border:1px solid #333;background:#111;color:#fff;font-weight:700}
+.tabs button.active{background:#a855f7}
+.section{display:none;flex:1;flex-direction:column;overflow:hidden}
 .section.active{display:flex}
-.hero{text-align:center;padding:10px 12px 4px;flex-shrink:0}
-.hero h2{font-size:22px;margin:0;background:linear-gradient(90deg,#a855f7,#ec4899,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-.hero p{color:#aaa;font-size:12px;margin:4px 0 0}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:8px 12px;flex-shrink:0;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chips button{white-space:nowrap;padding:9px 14px;border-radius:20px;border:1px solid #a855f7;background:rgba(168,85,247,.15);color:#fff;cursor:pointer;font-size:13px;font-weight:700;flex-shrink:0}
-.chat{flex:1 !important;height:auto !important;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:14px 14px 110px !important;width:100%}
-.msg{max-width:92%;padding:13px 15px;border-radius:18px;font-size:16px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
-.msg.ai{background:#1a0b2e;border:1px solid #a855f7;align-self:flex-start;border-bottom-right-radius:4px}
-.msg.user{background:linear-gradient(90deg,#a855f7,#7c3aed);align-self:flex-end;border-bottom-left-radius:4px}
-.msg small{display:block;font-size:11px;color:#c084fc;font-weight:800}
-.msg img{width:100%;border-radius:14px;margin-top:8px;border:1px solid #a855f7}
-.typing{display:flex;gap:5px;padding:10px;background:#1a0b2e;border:1px solid #a855f7;border-radius:16px;width:60px}
-.typing span{width:8px;height:8px;background:#a855f7;border-radius:50%;animation:b 1s infinite}
-.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
-@keyframes b{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.other{padding:14px;overflow-y:auto;flex:1;width:100%;max-width:700px;margin:0 auto}
-.card{background:#150a26;border:1px solid #a855f7;border-radius:16px;padding:13px;margin:10px 0}
-.card h3{margin:0 0 8px;color:#c084fc;font-size:16px}
-.row{display:flex;gap:8px;margin-top:10px}
-.row input,.row select,textarea{flex:1;padding:13px;border-radius:20px;border:1px solid #a855f7;background:#111;color:#fff;outline:none;font-size:15px;font-family:inherit}
-textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
-.btn{padding:12px 18px;border-radius:20px;border:none;background:linear-gradient(90deg,#a855f7,#ec4899);color:#fff;font-weight:800;cursor:pointer;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.grid button{padding:14px;border-radius:12px;border:1px solid #333;background:#1a1a1a;color:#fff;font-size:16px;cursor:pointer;font-weight:700}
-.grid button.op{background:#a855f7}
-.result{background:#000;border:1px dashed #a855f7;border-radius:12px;padding:12px;margin-top:10px;font-size:15px;line-height:1.7;white-space:pre-wrap;min-height:50px}
-.result img{width:100%;border-radius:12px;margin-top:8px}
-/* --- الكيبورد الجديد - مفيش أخضر خالص --- */
-.bottom{position:fixed !important;bottom:8px !important;left:8px !important;right:8px !important;z-index:9999 !important;display:flex !important;gap:8px;align-items:center;padding:7px;background:#111111 !important;border:2px solid #a855f7 !important;border-radius:30px !important;max-width:700px;margin:0 auto}
-.bottom input{flex:1 !important;padding:15px 14px;border-radius:22px;border:none;background:#1a1a1a;color:#fff;outline:none;font-size:16px;min-width:0}
-.micBtn{width:48px;height:48px;min-width:48px;border-radius:50%;border:none;background:#2a2a2a;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
-.sendBtn{height:48px;min-width:78px;padding:0 18px;border-radius:25px;border:none;background:#a855f7 !important;color:#fff !important;font-weight:900;font-size:16px;cursor:pointer;flex-shrink:0}
-.sendBtn:active{background:#7c3aed !important}
-.game{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:12px auto}
-.game button{aspect-ratio:1;border-radius:14px;border:1px solid #a855f7;background:#111;color:#fff;font-size:32px;font-weight:900;cursor:pointer}
-.footer{text-align:center;font-size:11px;color:#666;padding:10px}
-.footer a{color:#a855f7;text-decoration:none;font-weight:800}
+.chat{flex:1;overflow-y:auto;padding:12px 12px 110px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.7;white-space:pre-wrap}
+.msg.ai{background:#1a0b2e;border:1px solid #a855f7;align-self:flex-start}
+.msg.user{background:#a855f7;align-self:flex-end}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px}
+.chips button{white-space:nowrap;padding:8px 12px;border-radius:20px;border:1px solid #a855f7;background:#1a0b2e;color:#fff}
+.bottom{position:fixed;bottom:8px;left:8px;right:8px;display:flex;gap:8px;padding:6px;background:#111;border:2px solid #a855f7;border-radius:30px;max-width:700px;margin:auto;z-index:999}
+.bottom input{flex:1;padding:14px;border:none;border-radius:22px;background:#1a1a1a;color:#fff;font-size:16px;outline:none;min-width:0}
+.sendBtn{height:48px;padding:0 20px;border-radius:25px;border:none;background:#a855f7;color:#fff;font-weight:900;font-size:16px}
+.waBtn{display:block;margin-top:10px;background:#25D366;color:#fff;text-align:center;padding:10px;border-radius:14px;text-decoration:none;font-weight:900;font-size:14px}
+.other{padding:12px;overflow-y:auto;flex:1}
+.card{background:#150a26;border:1px solid #a855f7;border-radius:14px;padding:12px;margin:10px 0}
+.card textarea,.card input{width:100%;padding:12px;border-radius:12px;background:#111;color:#fff;border:1px solid #a855f7;margin-top:8px}
+.btn{width:100%;padding:13px;border:none;border-radius:20px;background:#a855f7;color:#fff;font-weight:800;margin-top:8px}
+.result{background:#000;border:1px dashed #a855f7;padding:10px;border-radius:12px;margin-top:8px;white-space:pre-wrap}
+.result img{width:100%;border-radius:12px}
 </style>
 </head>
 <body>
 
-<div class="top"><div class="avatar">Dola</div><div style="flex:1"><h1>DOLA <span>AI PRO</span> 💜</h1><p>بيعرف يعمل أي حاجة - صاحبك</p></div><div class="online"></div></div>
+<div class="top"><div style="width:45px;height:45px;border-radius:50%;background:#000;border:2px solid #a855f7;display:flex;align-items:center;justify-content:center;color:#a855f7;font-weight:900">Dola</div><div><b>DOLA <span>AI PRO</span></b><br><small style="color:#aaa">بيعرف يعمل أي حاجة</small></div></div>
 
 <div class="tabs">
-<button class="tab active" onclick="show('chatTab',this)">💬 شات</button>
-<button class="tab" onclick="show('imgTab',this)">🎨 صور</button>
-<button class="tab" onclick="show('calcTab',this)">🧮 حاسبة</button>
-<button class="tab" onclick="show('transTab',this)">🌍 ترجمة</button>
-<button class="tab" onclick="show('makeTab',this)">✍️ اعملي</button>
-<button class="tab" onclick="show('gameTab',this)">🎮 لعبة</button>
-<button class="tab" onclick="show('chargeTab',this)">💎 شحن</button>
+<button class="active" onclick="showTab('chatTab',this)">💬 شات</button>
+<button onclick="showTab('imgTab',this)">🎨 صور</button>
+<button onclick="showTab('makeTab',this)">✍️ اعملي</button>
+<button onclick="showTab('chargeTab',this)">💎 شحن</button>
 </div>
 
 <div class="section active" id="chatTab">
-<div class="hero"><h2>عامل ايه يا صاحبي؟ 👑</h2><p>DOLA AI PRO - اسألني أي حاجة بالعربي</p></div>
 <div class="chips">
-<button onclick="askMe('السلام عليكم')">👋 السلام عليكم</button>
-<button onclick="askMe('ارسم لي صورة بطل خارق')">🎨 ارسم صورة</button>
-<button onclick="askMe('هل الأغاني حرام ولا حلال؟')">🕌 حرام ولا حلال؟</button>
-<button onclick="askMe('قولي نكتة')">😂 نكتة</button>
-<button onclick="askMe('مين عادل؟')">👑 مين عادل؟</button>
-<button onclick="askMe('مين هو عبد الحليم؟')">😂 مين عبد الحليم؟</button>
+<button onclick="quickSend('السلام عليكم')">👋 السلام عليكم</button>
+<button onclick="quickSend('مين عادل؟')">👑 مين عادل؟</button>
+<button onclick="quickSend('مين هو عبد الحليم؟')">😂 مين عبد الحليم؟</button>
+<button onclick="quickSend('قولي نكتة')">😂 نكتة</button>
 </div>
-<div class="chat" id="chat"><div class="msg ai"><small>💜 DOLA AI PRO</small>اهلا اهلا يا صاحبي 👑🔥
-نورّت والله، وحشني!
-انا DOLA AI PRO - زي Meta AI بالظبط، بس بالعربي المصري 💜
-اكتب تحت ودوس إرسال، هرد عليك على طول 👇</div></div>
-<div class="footer">صُنع بواسطة 👑 <a href="https://wa.me/201062056341">عادل 01062056341</a> | DOLA AI PRO © 2026</div>
+<div class="chat" id="chat">
+<div class="msg ai">اهلا يا صاحبي 👑🔥 انا DOLA AI PRO - اكتب تحت ودوس إرسال وهرد عليك على طول 💜<br><br>ولو عايز رسالتك توصل لعادل نفسه، دوس على زرار الواتساب اللي هيظهر تحت رسالتك 📩</div>
+</div>
 </div>
 
-<div class="section" id="imgTab"><div class="other"><div class="card"><h3>🎨 مولد صور - زي Meta AI</h3>
-<textarea id="imgText" placeholder="مثال: أسد قوي واقف في الغابة - بطل خارق لابس بنفسجي - عربية سباق"></textarea>
-<div class="chips" style="margin-top:10px">
-<button onclick="quickImg('بطل خارق لابس بنفسجي، اسمه عادل')">🦸 بطل خارق</button>
-<button onclick="quickImg('أسد قوي في الغابة')">🦁 أسد</button>
-<button onclick="quickImg('عربية سباق حمراء')">🏎️ عربية</button>
-<button onclick="quickImg('قصر جميل في السماء')">🏰 قصر</button>
-</div>
-<button class="btn" style="width:100%;margin-top:10px" onclick="doImg()">اعملي الصورة 🎨</button>
-<div class="result" id="imgResult">الصورة هتظهر هنا...</div></div></div></div>
+<div class="section" id="imgTab"><div class="other"><div class="card"><h3>🎨 اعملي صورة</h3><textarea id="imgText" placeholder="اكتب الصورة اللي عايزها..."></textarea><button class="btn" onclick="doImg()">اعملي الصورة 🎨</button><div class="result" id="imgResult">الصورة هتظهر هنا</div></div></div></div>
 
-<div class="section" id="calcTab"><div class="other"><div class="card"><h3>🧮 آلة حاسبة بتحل أي مسألة</h3>
-<input id="calcInput" placeholder="اكتب المسألة: 15*8+20" style="width:100%;padding:13px;border-radius:14px;border:1px solid #a855f7;background:#111;color:#fff">
-<div class="grid">
-<button onclick="addCalc('7')">7</button><button onclick="addCalc('8')">8</button><button onclick="addCalc('9')">9</button><button class="op" onclick="addCalc('/')">÷</button>
-<button onclick="addCalc('4')">4</button><button onclick="addCalc('5')">5</button><button onclick="addCalc('6')">6</button><button class="op" onclick="addCalc('*')">×</button>
-<button onclick="addCalc('1')">1</button><button onclick="addCalc('2')">2</button><button onclick="addCalc('3')">3</button><button class="op" onclick="addCalc('-')">-</button>
-<button onclick="addCalc('0')">0</button><button onclick="addCalc('.')">.</button><button onclick="document.getElementById('calcInput').value=''">C</button><button class="op" onclick="addCalc('+')">+</button>
-</div>
-<button class="btn" style="width:100%;margin-top:10px" onclick="solveCalc()">= حل المسألة</button>
-<button class="btn" style="width:100%;margin-top:8px;background:#111;border:1px solid #a855f7" onclick="askAIExplain()">🤖 اشرحلي الحل بالتفصيل</button>
-<div class="result" id="calcResult">الناتج هيظهر هنا...</div></div></div></div>
+<div class="section" id="makeTab"><div class="other"><div class="card"><h3>✍️ اعملي أي حاجة</h3><textarea id="makeText" placeholder="اكتب لي قصة - موضوع تعبير - بوست - شعر"></textarea><button class="btn" onclick="doMake()">اعملي ده ✨</button><div class="result" id="makeResult">هنا هيظهر اللي عملته</div></div></div></div>
 
-<div class="section" id="transTab"><div class="other"><div class="card"><h3>🌍 مترجم فوري</h3>
-<textarea id="transText" placeholder="اكتب الكلام اللي عايز تترجمه..."></textarea>
-<div class="row"><select id="transLang"><option value="en">انجليزي</option><option value="fr">فرنساوي</option><option value="es">اسباني</option><option value="de">ألماني</option><option value="ar">عربي</option><option value="it">ايطالي</option><option value="tr">تركي</option></select><button class="btn" onclick="doTranslate()">ترجم 🌍</button></div>
-<div class="result" id="transResult">الترجمة هتظهر هنا...</div></div></div></div>
+<div class="section" id="chargeTab"><div class="other"><div class="card" style="text-align:center"><h3>💎 شحن جواهر فري فاير</h3><p>مع عادل الملك 👑</p><p style="font-size:22px;font-weight:900">📞 01062056341</p><a href="https://wa.me/201062056341" style="display:block;background:#25D366;color:#fff;padding:14px;border-radius:20px;text-decoration:none;font-weight:900">💬 كلم عادل واتساب واشحن دلوقتي</a></div></div></div>
 
-<div class="section" id="makeTab"><div class="other"><div class="card"><h3>✍️ خليه يعملك أي حاجة</h3>
-<textarea id="makeText" placeholder="مثال: اكتب لي موضوع تعبير - قصة عن بطل - بوست جامد"></textarea>
-<div class="chips" style="margin-top:10px">
-<button onclick="quickMake('اكتب لي قصة قصيرة حلوة عن بطل اسمه عادل')">📖 قصة عن عادل</button>
-<button onclick="quickMake('اكتب لي موضوع تعبير عن النظافة')">📝 موضوع تعبير</button>
-<button onclick="quickMake('اكتب لي بوست جامد للفيسبوك عن فري فاير')">📱 بوست فيس</button>
-<button onclick="quickMake('اكتب لي شعر عن الصاحب الجدع')">🎤 شعر</button>
-</div>
-<button class="btn" style="width:100%;margin-top:10px" onclick="doMake()">اعملي ده ✨</button>
-<div class="result" id="makeResult">اللي هعمله هيظهر هنا...</div></div></div></div>
-
-<div class="section" id="gameTab"><div class="other"><div class="card"><h3>🎮 العب X O مع DOLA</h3><p id="gameStatus" style="text-align:center;font-weight:800">دورك يا صاحبي - انت X</p>
-<div class="game" id="game"></div>
-<button class="btn" style="width:100%" onclick="resetGame()">العب تاني 🔄</button></div></div></div>
-
-<div class="section" id="chargeTab"><div class="other"><div class="card" style="text-align:center"><h3>💎 شحن جواهر فري فاير</h3><p>أرخص سعر وأسرع شحن مع عادل الملك 👑</p>
-<p style="font-size:22px;font-weight:900">📞 01062056341</p>
-<a href="https://wa.me/201062056341" style="display:block;background:#a855f7;color:#fff;padding:14px;border-radius:20px;text-decoration:none;font-weight:900;margin:10px 0">💬 كلم عادل واتساب واشحن دلوقتي</a>
-</div></div></div>
-
-<!-- الكيبورد الجديد -->
 <div class="bottom" id="bottomBar">
-<button type="button" class="micBtn" id="micBtn" onclick="startVoice()">🎤</button>
-<input id="input" placeholder="اكتب رسالتك هنا..." onkeydown="if(event.key==='Enter') sendMsg()">
-<button type="button" class="sendBtn" id="sendBtn" onclick="sendMsg()">إرسال</button>
+<input id="input" placeholder="اكتب رسالتك هنا..." autocomplete="off">
+<button type="button" class="sendBtn" onclick="sendMsg()">إرسال</button>
 </div>
 
 <script>
-let chat=document.getElementById('chat'), input=document.getElementById('input');
-let myName = localStorage.getItem('dola_name') || 'صاحبي';
-function show(id,btn){ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); document.getElementById('bottomBar').style.display = id==='chatTab' ? 'flex' : 'none'; }
-function askMe(t){ show('chatTab',document.querySelector('.tab')); input.value=t; sendMsg(); }
-
-async function askAI(userQ){
-  let system = "انت DOLA AI PRO، ذكاء صناعي مصري مسلم، زي Meta AI بالظبط. قواعد صارمة: رد بالعربي المصري العامية فقط 100%، ممنوع حرف انجليزي واحد، ممنوع فرانكو. جاوب على أي سؤال، اشرح، اعمل قصص وشعر ومواضيع وواجب. اسم المستخدم هو "+myName+". السؤال: ";
-  let urls = [
-    'https://text.pollinations.ai/'+encodeURIComponent(system+userQ),
-    'https://text.pollinations.ai/'+encodeURIComponent(system+userQ)+'?model=openai'
-  ];
-  for(let u of urls){
-    try{
-      let ctrl=new AbortController(); setTimeout(()=>ctrl.abort(),9000);
-      let r=await fetch(u,{signal:ctrl.signal});
-      let t=await r.text();
-      if(t && t.length>10 && !t.includes('rate limit')) return t;
-    }catch(e){}
-  }
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('bottomBar').style.display = (id==='chatTab') ? 'flex' : 'none';
+}
+function quickSend(t){ document.getElementById('input').value = t; sendMsg(); }
+function addMsg(text, type){
+  var chat = document.getElementById('chat');
+  var d = document.createElement('div');
+  d.className = 'msg ' + type;
+  d.innerHTML = text;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  return d;
+}
+function getReply(q){
+  var l = q.toLowerCase();
+  if(l.indexOf('عبد الحليم')!==-1 || l.indexOf('عبدالحليم')!==-1 || l.indexOf('حليم')!==-1) return 'عبد الحليم ده صاحبنا الجدع 😂 مسمي نفسه الملك، بس أهم حاجة فيه انه متواضع أوي ومبيحبش التكبر خالص، ومبيسيبش فرض خالص، وجدع وراجل مع صحابه كلهم، والعيال كلها بتحبه وبتحب تهزر معاه 😂';
+  if(l.indexOf('عادل')!==-1 || l.indexOf('adel')!==-1) return 'عادل ده ملك الملوك 👑🔥 هو صاحب الموقع ده، وهو اللي عامل الموقع ده، وهو اللي عملني DOLA AI PRO 💜 رقمه 01062056341 كلمه واتساب https://wa.me/201062056341';
+  if(l.indexOf('سلام')!==-1) return 'وعليكم السلام ورحمة الله يا صاحبي 👑🔥 نورّت والله، عامل ايه؟';
+  if(l.indexOf('ازيك')!==-1 || l.indexOf('عامل ايه')!==-1) return 'انا زي الفل طول ما انت بخير يا صاحبي 😎💜 انت عامل ايه؟';
+  if(l.indexOf('صباح')!==-1) return 'صباح الفل يا صاحبي ☀️💜 يومك هيبقى جامد النهارده 👑';
+  if(l.indexOf('مساء')!==-1 || l.indexOf('مسا')!==-1) return 'مساء الجمال يا صاحبي 🌙💜 عامل ايه؟';
+  if(l.indexOf('نكتة')!==-1 || l.indexOf('ضحكني')!==-1) return 'اسمع دي 😂 واحد محشش قاله صاحبه انت فين؟ قاله في البيت، قاله طب تعالا، قاله ما انا في البيت 😂😂';
+  if(l.indexOf('اغاني')!==-1) return '🕌 بص يا صاحبي، الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام، والأغاني الهادية اللي كلامها نضيف عادي. نصيحتي اسمع قرآن هترتاح أكتر 💜';
+  if(l.indexOf('حرام')!==-1 || l.indexOf('حلال')!==-1) return 'بص يا صاحبي، لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال 💜';
+  if(l.indexOf('شحن')!==-1 || l.indexOf('جواهر')!==-1) return '💎 عايز تشحن؟ كلم عادل الملك 📞 01062056341 https://wa.me/201062056341';
+  if(l.indexOf('فري فاير')!==-1 || l.indexOf('ببجي')!==-1) return '🎮 فري فاير لعبة جامدة، العبها ساعة للمتعة وصلي صلاتك وذاكر، ولو عايز تشحن كلم عادل 01062056341';
+  if(l.indexOf('قصة')!==-1) return 'كان يا ما كان، كان فيه بطل اسمه عادل 👑 كان جدع وشجاع، وكل الناس بتحبه، وقرر يعمل موقع ذكاء صناعي عشان يساعد كل الناس، ونجح وبقى ملك الملوك 🔥';
+  if(l.indexOf('شعر')!==-1) return 'يا صاحبي يا جدع يا ملك 👑 انت اللي في الشدة بتبان - صاحبك عادل دايما جنبك في الفرح وفي الأحزان 💜';
+  if(l.indexOf('بحبك')!==-1) return 'وانا بحبك أكتر والله يا صاحبي 💜🥰';
+  if(l.indexOf('شكرا')!==-1 || l.indexOf('تسلم')!==-1) return 'حبيبي يا صاحبي 💜 العفو، انت تأمر بس';
+  if(l.indexOf('زهقان')!==-1 || l.indexOf('مخنوق')!==-1 || l.indexOf('زعلان')!==-1) return 'مالك يا صاحبي؟ 😔💜 متزعلش انا معاك ومش هسيبك. احكيلي مالك';
+  if(l.indexOf('انت مين')!==-1 || l.indexOf('اسمك ايه')!==-1) return 'انا DOLA AI PRO 💜 صاحبك الأنتيم، اللي عملني عادل الملك 👑 اسألني أي حاجة وانا هجاوبك';
+  if(l.indexOf('مذاكرة')!==-1 || l.indexOf('امتحان')!==-1 || l.indexOf('واجب')!==-1) return 'بص يا صاحبي للمذاكرة: ذاكر 25 دقيقة وريح 5 دقايق، وابدأ بالصعب الأول، وصلي الفجر هتلاقي مخك رايق 💪 انت قدها يا بطل 👑';
   return null;
 }
-
-function smartReply(q){
-  let l=q.toLowerCase();
-  if(l.includes('عبد الحليم')||l.includes('عبدالحليم')||l.includes('حليم')) return 'عبد الحليم ده صاحبنا الجدع 😂 مسمي نفسه الملك، بس أهم حاجة فيه انه متواضع أوي ومبيحبش التكبر خالص، ومبيسيبش فرض خالص، وجدع وراجل مع صحابه كلهم، والعيال كلها بتحبه وبتحب تهزر معاه 😂';
-  if(l.includes('عادل')||l.includes('adel')) return 'عادل ده ملك الملوك 👑🔥 هو صاحب الموقع ده، وهو اللي عامل الموقع ده، وهو اللي عملني DOLA AI PRO 💜 رقمه 01062056341 كلمه واتساب https://wa.me/201062056341';
-  if(l.includes('سلام')) return 'وعليكم السلام ورحمة الله يا '+myName+' 👑🔥 نورّت والله، عامل ايه؟';
-  if(l.includes('ازيك')||l.includes('عامل ايه')||l.includes('اخبارك')) return 'انا زي الفل طول ما انت بخير يا '+myName+' 😎💜 انت عامل ايه؟ احكيلي';
-  if(l.includes('صباح')) return 'صباح الفل يا '+myName+' ☀️💜 يومك هيبقى جامد النهارده 👑';
-  if(l.includes('مساء')||l.includes('مسا')) return 'مساء الجمال يا '+myName+' 🌙💜 عامل ايه؟';
-  if(l.includes('اغاني')||l.includes('الاغاني')) return '🕌 بص يا صاحبي، الأغاني فيها اختلاف بين العلماء، جمهور العلماء قالوا ان الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام. نصيحتي: لو بتضيع وقتك وبتبعدك عن الصلاة ابعد عنها، واسمع قرآن هترتاح أكتر 💜';
-  if(l.includes('حرام')||l.includes('حلال')) return 'بص يا '+myName+'، لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال. قولي الحاجة بالظبط وانا اقولك حكمها بالتفصيل 💜';
-  if(l.includes('فري فاير')||l.includes('ببجي')) return '🎮 فري فاير لعبة جامدة يا '+myName+'، العبها ساعة للمتعة وصلي صلاتك وذاكر، ولو عايز تشحن جواهر كلم عادل الملك 📞 01062056341';
-  if(l.includes('شحن')||l.includes('جواهر')) return '💎 عايز تشحن؟ كلم عادل الملك 📞 01062056341 https://wa.me/201062056341';
-  if(l.includes('نكتة')||l.includes('ضحكني')) return 'اسمع دي 😂 واحد محشش قاله صاحبه انت فين؟ قاله في البيت، قاله طب تعالا، قاله ما انا في البيت 😂😂 عايز واحدة تانية؟';
-  if(l.includes('قصة')) return 'كان يا ما كان يا '+myName+'، كان فيه بطل اسمه عادل 👑 كان جدع وشجاع، وكل الناس بتحبه، وكان بيساعد صحابه كلهم، وفي يوم قرر يعمل موقع ذكاء صناعي عشان يساعد كل الناس، ونجح وبقى ملك الملوك 🔥 عايز اكملك القصة؟';
-  if(l.includes('شعر')) return 'يا صاحبي يا جدع يا ملك 👑\nانت اللي في الشدة بتبان\nصاحبك عادل دايما جنبك\nفي الفرح وفي الأحزان 💜';
-  if(l.includes('بحبك')) return 'وانا بحبك أكتر والله يا '+myName+' 💜🥰 انت صاحبي الغالي';
-  if(l.includes('شكرا')||l.includes('تسلم')) return 'حبيبي يا '+myName+' 💜 العفو، انت تأمر بس';
-  if(l.includes('زهقان')||l.includes('مخنوق')||l.includes('متضايق')||l.includes('زعلان')) return 'مالك يا '+myName+'؟ 😔💜 متزعلش انا معاك ومش هسيبك. احكيلي مالك';
-  if(l.includes('انت مين')||l.includes('اسمك ايه')) return 'انا DOLA AI PRO 💜 صاحبك الأنتيم، زي Meta AI بالظبط بس بالعربي، اللي عملني عادل الملك 👑 اسألني أي حاجة وانا هجاوبك';
-  if(l.includes('مذاكرة')||l.includes('دراسة')||l.includes('امتحان')||l.includes('مدرسة')||l.includes('واجب')) return 'بص يا '+myName+' للمذاكرة: ذاكر 25 دقيقة وريح 5 دقايق، وابدأ بالصعب الأول، واقفل الموبايل وانت بتذاكر، وصلي الفجر هتلاقي مخك رايق 💪 انت قدها يا بطل 👑 ابعتلي الواجب بتاعك وانا احلهولك';
+async function getAIReply(q){
+  try{
+    var r = await fetch('https://text.pollinations.ai/' + encodeURIComponent('رد بالعربي المصري فقط، ممنوع انجليزي، رد باختصار: ' + q));
+    var t = await r.text();
+    if(t && t.length>5) return t;
+  }catch(e){}
   return null;
 }
-function genericArabicReply(q){ return 'فهمتك يا '+myName+' 💜👑 انت بتسأل عن "'+q+'" - بص يا صاحبي، الخلاصة: الموضوع ده مهم، ولازم تفكر فيه بهدوء وتاخد بالأسباب، وتصلي وتدعي ربنا يوفقك. لو عايزني اشرحلك بالتفصيل أكتر، أو اعملك قصة أو شعر أو موضوع تعبير عنه، قولي وانا اعملهولك على طول.'; }
-function startVoice(){
-  let btn=document.getElementById('micBtn');
-  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){ alert('موبايلك مش بيدعم الصوت يا صاحبي، اكتب كتابة'); return; }
-  let Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let rec = new Rec(); rec.lang='ar-EG'; rec.interimResults=false;
-  btn.textContent='🔴';
-  rec.onresult = (e)=>{ let t=e.results[0][0].transcript; input.value=t; btn.textContent='🎤'; sendMsg(); };
-  rec.onerror = ()=>{ btn.textContent='🎤'; };
-  rec.onend = ()=>{ btn.textContent='🎤'; };
-  rec.start();
-}
-async function sendMsg(){
-  let text=input.value.trim();
-  if(!text){ input.focus(); return; }
-  if(text.includes('اسمي') || text.includes('انا اسمي')){
-    let n=text.replace('اسمي','').replace('انا','').trim().split(' ')[0];
-    if(n){ myName=n; localStorage.setItem('dola_name',n); }
-  }
-  addMsg(text,'user');
-  input.value='';
+function sendMsg(){
+  var input = document.getElementById('input');
+  var text = input.value.trim();
+  if(!text) { input.focus(); return; }
+  // رسالتك بتظهر فورا
+  var userDiv = addMsg(text, 'user');
+  // زرار يبعت رسالتك لعادل على الواتساب - دي اللي هتوصلك انت
+  var waLink = 'https://wa.me/201062056341?text=' + encodeURIComponent('رسالة من موقع DOLA AI PRO: ' + text);
+  userDiv.innerHTML = text + '<a class="waBtn" href="'+waLink+'" target="_blank">📩 ابعت رسالتك دي لعادل واتساب</a>';
+  input.value = '';
   input.focus();
-  showTyping();
-  let fast=smartReply(text);
-  let isSaved = text.includes('عادل')||text.includes('عبد الحليم')||text.includes('عبدالحليم')||text.includes('حليم')||text.includes('سلام')||text.includes('ازيك')||text.includes('صباح')||text.includes('مساء')||text.includes('نكتة');
-  if(isSaved){ setTimeout(()=>{removeTyping(); addMsg(fast,'ai')},600); return; }
-  if(text.includes('ارسم')||text.includes('صورة')||text.includes('صوره')){
-    removeTyping();
-    let prompt=text.replace('ارسم لي','').replace('ارسم','').replace('صورة','').replace('صوره','').trim() || 'بطل خارق';
-    let imgUrl='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt+', high quality, beautiful, detailed')+'?width=512&height=512&nologo=true';
-    let div=document.createElement('div'); div.className='msg ai';
-    div.innerHTML='<small>💜 DOLA AI PRO</small>عملتلك الصورة يا '+myName+' 🎨🔥<br><img src="'+imgUrl+'"><br>عايز صورة تانية؟ قولي ارسم لي كذا';
-    chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
+  if(text.indexOf('ارسم')!==-1 || text.indexOf('صورة')!==-1 || text.indexOf('صوره')!==-1){
+    var p = text.replace('ارسم لي','').replace('ارسم','').replace('صورة','').replace('صوره','').trim() || 'بطل خارق';
+    addMsg('عملتلك الصورة يا صاحبي 🎨🔥<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(p)+'?width=512&height=512&nologo=true" style="width:100%;border-radius:12px;margin-top:8px">', 'ai');
     return;
   }
-  let m=tryMath(text);
-  if(m){ setTimeout(()=>{removeTyping(); addMsg(m,'ai')},400); return; }
-  let ans=await askAI(text);
-  removeTyping();
-  if(!ans || ans.length<5){ ans = fast || genericArabicReply(text); }
-  let enCount=(ans.match(/[a-zA-Z]/g)||[]).length;
-  if(enCount>30 && !ans.includes('wa.me')){ ans = genericArabicReply(text); }
-  addMsg(ans.slice(0,2000),'ai');
+  var fast = getReply(text);
+  if(fast){ setTimeout(function(){ addMsg(fast, 'ai'); }, 500); return; }
+  var typing = addMsg('...', 'ai');
+  getAIReply(text).then(function(ans){
+    if(!ans || ans.length<5) ans = 'فهمتك يا صاحبي 💜👑 انت بتقول "' + text + '" - كلامك صح، وانا معاك. قولي عايزني اشرحلك أكتر؟ ولا اعملك قصة؟ ولا ارسم لك صورة؟ انا معاك في أي حاجة 😎';
+    var en = (ans.match(/[a-zA-Z]/g)||[]).length;
+    if(en>30 && ans.indexOf('wa.me')===-1) ans = 'فهمتك يا صاحبي 💜👑 انت بتقول "' + text + '" - الموضوع ده مهم، ولازم تفكر فيه بهدوء، وتصلي وتدعي ربنا يوفقك.';
+    typing.innerHTML = ans.slice(0,2000);
+  });
 }
-function addMsg(t,type){ let d=document.createElement('div'); d.className='msg '+type; if(type==='ai') d.innerHTML='<small>💜 DOLA AI PRO</small>'+t; else d.textContent=t; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
-function showTyping(){ let t=document.createElement('div'); t.className='typing'; t.id='typing'; t.innerHTML='<span></span><span></span><span></span>'; chat.appendChild(t); chat.scrollTop=chat.scrollHeight; }
-function removeTyping(){ let t=document.getElementById('typing'); if(t) t.remove(); }
-function tryMath(q){ let c=q.replace(/ /g,'').replace(/×/g,'*').replace(/÷/g,'/').replace(/x/g,'*'); if(/^[0-9+\-*/().]+$/.test(c)&&c.length>2&&c.length<20){ try{ return '🧮 يا صاحبي الناتج = '+eval(c)+' 😎'; }catch(e){return null} } return null; }
-function addCalc(v){ document.getElementById('calcInput').value+=v; }
-function solveCalc(){ let v=document.getElementById('calcInput').value; try{ let r=eval(v.replace(/×/g,'*').replace(/÷/g,'/')); document.get
+document.getElementById('input').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); sendMsg(); } });
+function doImg(){
+  var t = document.getElementById('imgText').value.trim();
+  if(!t) return;
+  document.getElementById('imgResult').innerHTML = 'بعمل الصورة...<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(t)+'?width=512&height=512&nologo=true">';
+}
+async function doMake(){
+  var t = document.getElementById('makeText').value.trim();
+  if(!t) return;
+  document.getElementById('makeResult').textContent = 'بعملهولك... ⏳';
+  var r = await getAIReply(t);
+  document.getElementById('makeResult').textContent = r || 'عملتلك اللي طلبته يا صاحبي 💜 ' + t;
+}
+</script>
+</body>
+</html>
