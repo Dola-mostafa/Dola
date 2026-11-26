@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -12,7 +13,7 @@ body{font-family:'Segoe UI',Arial;background:#050005;color:#fff;display:flex;fle
 .avatar{width:48px;height:48px;border-radius:50%;background:#000;border:2px solid #a855f7;color:#a855f7;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;box-shadow:0 0 20px #a855f7;flex-shrink:0}
 .top h1{font-size:19px;margin:0}.top h1 span{color:#a855f7}
 .top p{font-size:11px;color:#aaa;margin:0}
-.online{width:10px;height:10px;background:#22c55e;border-radius:50%;box-shadow:0 0 10px #22c55e;flex-shrink:0}
+.online{width:10px;height:10px;background:#a855f7;border-radius:50%;box-shadow:0 0 10px #a855f7;flex-shrink:0}
 .tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#0a0a0a;flex-shrink:0;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{white-space:nowrap;padding:10px 16px;border-radius:20px;border:1px solid #333;background:#111;color:#fff;cursor:pointer;font-weight:700;font-size:13px}
@@ -25,7 +26,7 @@ body{font-family:'Segoe UI',Arial;background:#050005;color:#fff;display:flex;fle
 .chips{display:flex;gap:8px;overflow-x:auto;padding:8px 12px;flex-shrink:0;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chips button{white-space:nowrap;padding:9px 14px;border-radius:20px;border:1px solid #a855f7;background:rgba(168,85,247,.15);color:#fff;cursor:pointer;font-size:13px;font-weight:700;flex-shrink:0}
-.chat{flex:1 !important;height:auto !important;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:14px 14px 100px !important;width:100%}
+.chat{flex:1 !important;height:auto !important;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:14px 14px 110px !important;width:100%}
 .msg{max-width:92%;padding:13px 15px;border-radius:18px;font-size:16px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
 .msg.ai{background:#1a0b2e;border:1px solid #a855f7;align-self:flex-start;border-bottom-right-radius:4px}
 .msg.user{background:linear-gradient(90deg,#a855f7,#7c3aed);align-self:flex-end;border-bottom-left-radius:4px}
@@ -47,10 +48,12 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 .grid button.op{background:#a855f7}
 .result{background:#000;border:1px dashed #a855f7;border-radius:12px;padding:12px;margin-top:10px;font-size:15px;line-height:1.7;white-space:pre-wrap;min-height:50px}
 .result img{width:100%;border-radius:12px;margin-top:8px}
-.bottom{position:fixed !important;bottom:10px !important;left:8px !important;right:8px !important;z-index:9999 !important;display:flex !important;gap:8px;align-items:center;padding:6px;background:#111 !important;border:1px solid #a855f7 !important;border-radius:30px !important;box-shadow:0 0 25px rgba(168,85,247,.6) !important;max-width:700px;margin:0 auto}
-.bottom input{flex:1 !important;padding:14px 12px;border-radius:22px;border:none;background:#1a1a1a;color:#fff;outline:none;font-size:15px;min-width:0}
-.iconBtn{width:46px;height:46px;border-radius:50%;border:none;background:#222;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
-.btn2{width:52px !important;height:52px !important;min-width:52px !important;border-radius:50%;border:none;background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;font-size:24px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+/* --- الكيبورد الجديد - مفيش أخضر خالص --- */
+.bottom{position:fixed !important;bottom:8px !important;left:8px !important;right:8px !important;z-index:9999 !important;display:flex !important;gap:8px;align-items:center;padding:7px;background:#111111 !important;border:2px solid #a855f7 !important;border-radius:30px !important;max-width:700px;margin:0 auto}
+.bottom input{flex:1 !important;padding:15px 14px;border-radius:22px;border:none;background:#1a1a1a;color:#fff;outline:none;font-size:16px;min-width:0}
+.micBtn{width:48px;height:48px;min-width:48px;border-radius:50%;border:none;background:#2a2a2a;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
+.sendBtn{height:48px;min-width:78px;padding:0 18px;border-radius:25px;border:none;background:#a855f7 !important;color:#fff !important;font-weight:900;font-size:16px;cursor:pointer;flex-shrink:0}
+.sendBtn:active{background:#7c3aed !important}
 .game{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:12px auto}
 .game button{aspect-ratio:1;border-radius:14px;border:1px solid #a855f7;background:#111;color:#fff;font-size:32px;font-weight:900;cursor:pointer}
 .footer{text-align:center;font-size:11px;color:#666;padding:10px}
@@ -84,7 +87,7 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 <div class="chat" id="chat"><div class="msg ai"><small>💜 DOLA AI PRO</small>اهلا اهلا يا صاحبي 👑🔥
 نورّت والله، وحشني!
 انا DOLA AI PRO - زي Meta AI بالظبط، بس بالعربي المصري 💜
-اسألني أي حاجة، هجاوبك على طول، وبعمل صور وقصص وترجمة وواجب وأي حاجة 👇</div></div>
+اكتب تحت ودوس إرسال، هرد عليك على طول 👇</div></div>
 <div class="footer">صُنع بواسطة 👑 <a href="https://wa.me/201062056341">عادل 01062056341</a> | DOLA AI PRO © 2026</div>
 </div>
 
@@ -133,58 +136,36 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 
 <div class="section" id="chargeTab"><div class="other"><div class="card" style="text-align:center"><h3>💎 شحن جواهر فري فاير</h3><p>أرخص سعر وأسرع شحن مع عادل الملك 👑</p>
 <p style="font-size:22px;font-weight:900">📞 01062056341</p>
-<a href="https://wa.me/201062056341" style="display:block;background:#22c55e;color:#fff;padding:14px;border-radius:20px;text-decoration:none;font-weight:900;margin:10px 0">💬 كلم عادل واتساب واشحن دلوقتي</a>
+<a href="https://wa.me/201062056341" style="display:block;background:#a855f7;color:#fff;padding:14px;border-radius:20px;text-decoration:none;font-weight:900;margin:10px 0">💬 كلم عادل واتساب واشحن دلوقتي</a>
 </div></div></div>
 
+<!-- الكيبورد الجديد -->
 <div class="bottom" id="bottomBar">
-<button class="iconBtn" id="micBtn" onclick="startVoice()">🎤</button>
-<input id="input" placeholder="اسألني عن أي حاجة بالعربي..." onkeydown="if(event.key==='Enter') sendMsg()">
-<button class="btn2" onclick="sendMsg()">➤</button>
+<button type="button" class="micBtn" id="micBtn" onclick="startVoice()">🎤</button>
+<input id="input" placeholder="اكتب رسالتك هنا..." onkeydown="if(event.key==='Enter') sendMsg()">
+<button type="button" class="sendBtn" id="sendBtn" onclick="sendMsg()">إرسال</button>
 </div>
 
 <script>
 let chat=document.getElementById('chat'), input=document.getElementById('input');
 let myName = localStorage.getItem('dola_name') || 'صاحبي';
-let history=[];
 function show(id,btn){ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); document.getElementById('bottomBar').style.display = id==='chatTab' ? 'flex' : 'none'; }
 function askMe(t){ show('chatTab',document.querySelector('.tab')); input.value=t; sendMsg(); }
 
-// --- الذكاء الصناعي - بيحاول 3 مرات وبيجبره يرد عربي ---
 async function askAI(userQ){
-  let system = "انت DOLA AI PRO، ذكاء صناعي مصري مسلم، زي Meta AI بالظبط. قواعد صارمة جدا: 1) رد بالعربي المصري العامية فقط 100%، ممنوع حرف انجليزي واحد نهائيا، ممنوع فرانكو، ممنوع كلمات انجليزية زي AI أو ok أو hello. 2) جاوب على أي سؤال مهما كان، اشرح، اعمل قصص وشعر ومواضيع وواجب وترجمة. 3) لو سألك عن حرام ولا حلال جاوب بالعربي وبالدليل باختصار. 4) رد باختصار وبحب وبايموجي. 5) اسم المستخدم هو "+myName+". السؤال: ";
+  let system = "انت DOLA AI PRO، ذكاء صناعي مصري مسلم، زي Meta AI بالظبط. قواعد صارمة: رد بالعربي المصري العامية فقط 100%، ممنوع حرف انجليزي واحد، ممنوع فرانكو. جاوب على أي سؤال، اشرح، اعمل قصص وشعر ومواضيع وواجب. اسم المستخدم هو "+myName+". السؤال: ";
   let urls = [
     'https://text.pollinations.ai/'+encodeURIComponent(system+userQ),
-    'https://text.pollinations.ai/'+encodeURIComponent(system+userQ)+'?model=openai',
-    'https://text.pollinations.ai/'+encodeURIComponent('رد بالعربي المصري فقط، ممنوع انجليزي: '+userQ)
+    'https://text.pollinations.ai/'+encodeURIComponent(system+userQ)+'?model=openai'
   ];
   for(let u of urls){
     try{
       let ctrl=new AbortController(); setTimeout(()=>ctrl.abort(),9000);
       let r=await fetch(u,{signal:ctrl.signal});
       let t=await r.text();
-      if(t && t.length>10 && !t.includes('rate limit')){
-        let clean = await forceArabic(t, userQ);
-        if(clean) return clean;
-        return t;
-      }
+      if(t && t.length>10 && !t.includes('rate limit')) return t;
     }catch(e){}
   }
-  return null;
-}
-
-// --- فلتر العربي: لو الرد فيه انجليزي كتير، ترجمه للعربي ---
-async function forceArabic(text, userQ){
-  let en = (text.match(/[a-zA-Z]/g)||[]).length;
-  // لو الانجليزي قليل (اسماء أو روابط) سيبه
-  if(en < 15) return text;
-  // لو الانجليزي كتير، حاول تترجمه
-  try{
-    let ctrl=new AbortController(); setTimeout(()=>ctrl.abort(),8000);
-    let r=await fetch('https://text.pollinations.ai/'+encodeURIComponent('ترجم الكلام ده كله للعربي المصري العامية، ممنوع تسيب أي كلمة انجليزية: '+text.slice(0,1000)),{signal:ctrl.signal});
-    let t=await r.text();
-    if(t && t.length>10) return t;
-  }catch(e){}
-  // لو الترجمة فشلت، رجع رد عربي جاهز
   return null;
 }
 
@@ -196,50 +177,67 @@ function smartReply(q){
   if(l.includes('ازيك')||l.includes('عامل ايه')||l.includes('اخبارك')) return 'انا زي الفل طول ما انت بخير يا '+myName+' 😎💜 انت عامل ايه؟ احكيلي';
   if(l.includes('صباح')) return 'صباح الفل يا '+myName+' ☀️💜 يومك هيبقى جامد النهارده 👑';
   if(l.includes('مساء')||l.includes('مسا')) return 'مساء الجمال يا '+myName+' 🌙💜 عامل ايه؟';
-  if(l.includes('اغاني')||l.includes('الاغاني')) return '🕌 بص يا صاحبي، الأغاني فيها اختلاف بين العلماء:\n- جمهور العلماء قالوا ان الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام.\n- وفيه علماء قالوا ان الأغاني الهادية اللي كلامها نضيف عادي.\nنصيحتي: لو بتضيع وقتك وبتبعدك عن الصلاة ابعد عنها، واسمع قرآن هترتاح أكتر 💜';
-  if(l.includes('حرام')||l.includes('حلال')) return 'بص يا '+myName+'، الحكم ده لازم نرجع فيه للقرآن والسنة 💜 لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال. قولي الحاجة بالظبط وانا اقولك حكمها بالتفصيل';
+  if(l.includes('اغاني')||l.includes('الاغاني')) return '🕌 بص يا صاحبي، الأغاني فيها اختلاف بين العلماء، جمهور العلماء قالوا ان الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام. نصيحتي: لو بتضيع وقتك وبتبعدك عن الصلاة ابعد عنها، واسمع قرآن هترتاح أكتر 💜';
+  if(l.includes('حرام')||l.includes('حلال')) return 'بص يا '+myName+'، لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال. قولي الحاجة بالظبط وانا اقولك حكمها بالتفصيل 💜';
   if(l.includes('فري فاير')||l.includes('ببجي')) return '🎮 فري فاير لعبة جامدة يا '+myName+'، العبها ساعة للمتعة وصلي صلاتك وذاكر، ولو عايز تشحن جواهر كلم عادل الملك 📞 01062056341';
   if(l.includes('شحن')||l.includes('جواهر')) return '💎 عايز تشحن؟ كلم عادل الملك 📞 01062056341 https://wa.me/201062056341';
   if(l.includes('نكتة')||l.includes('ضحكني')) return 'اسمع دي 😂 واحد محشش قاله صاحبه انت فين؟ قاله في البيت، قاله طب تعالا، قاله ما انا في البيت 😂😂 عايز واحدة تانية؟';
   if(l.includes('قصة')) return 'كان يا ما كان يا '+myName+'، كان فيه بطل اسمه عادل 👑 كان جدع وشجاع، وكل الناس بتحبه، وكان بيساعد صحابه كلهم، وفي يوم قرر يعمل موقع ذكاء صناعي عشان يساعد كل الناس، ونجح وبقى ملك الملوك 🔥 عايز اكملك القصة؟';
   if(l.includes('شعر')) return 'يا صاحبي يا جدع يا ملك 👑\nانت اللي في الشدة بتبان\nصاحبك عادل دايما جنبك\nفي الفرح وفي الأحزان 💜';
   if(l.includes('بحبك')) return 'وانا بحبك أكتر والله يا '+myName+' 💜🥰 انت صاحبي الغالي';
-  if(l.includes('شكرا')||l.includes('تسلم')) return 'حبيبي يا '+myName+' 💜 العفو، انت تأمر بس، اسألني أي حاجة تانية';
-  if(l.includes('زهقان')||l.includes('مخنوق')||l.includes('متضايق')||l.includes('زعلان')) return 'مالك يا '+myName+'؟ 😔💜 متزعلش انا معاك ومش هسيبك. احكيلي مالك وانا هسمعك';
+  if(l.includes('شكرا')||l.includes('تسلم')) return 'حبيبي يا '+myName+' 💜 العفو، انت تأمر بس';
+  if(l.includes('زهقان')||l.includes('مخنوق')||l.includes('متضايق')||l.includes('زعلان')) return 'مالك يا '+myName+'؟ 😔💜 متزعلش انا معاك ومش هسيبك. احكيلي مالك';
   if(l.includes('انت مين')||l.includes('اسمك ايه')) return 'انا DOLA AI PRO 💜 صاحبك الأنتيم، زي Meta AI بالظبط بس بالعربي، اللي عملني عادل الملك 👑 اسألني أي حاجة وانا هجاوبك';
   if(l.includes('مذاكرة')||l.includes('دراسة')||l.includes('امتحان')||l.includes('مدرسة')||l.includes('واجب')) return 'بص يا '+myName+' للمذاكرة: ذاكر 25 دقيقة وريح 5 دقايق، وابدأ بالصعب الأول، واقفل الموبايل وانت بتذاكر، وصلي الفجر هتلاقي مخك رايق 💪 انت قدها يا بطل 👑 ابعتلي الواجب بتاعك وانا احلهولك';
   return null;
 }
-
-function genericArabicReply(q){
-  return 'فهمتك يا '+myName+' 💜👑 انت بتسأل عن "'+q+'" - بص يا صاحبي، الخلاصة: الموضوع ده مهم، ولازم تفكر فيه بهدوء وتاخد بالأسباب، وتصلي وتدعي ربنا يوفقك. لو عايزني اشرحلك بالتفصيل أكتر، أو اعملك قصة أو شعر أو موضوع تعبير عنه، قولي وانا اعملهولك على طول. انت شايف ايه في الموضوع ده؟';
-}
-
+function genericArabicReply(q){ return 'فهمتك يا '+myName+' 💜👑 انت بتسأل عن "'+q+'" - بص يا صاحبي، الخلاصة: الموضوع ده مهم، ولازم تفكر فيه بهدوء وتاخد بالأسباب، وتصلي وتدعي ربنا يوفقك. لو عايزني اشرحلك بالتفصيل أكتر، أو اعملك قصة أو شعر أو موضوع تعبير عنه، قولي وانا اعملهولك على طول.'; }
 function startVoice(){
   let btn=document.getElementById('micBtn');
   if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){ alert('موبايلك مش بيدعم الصوت يا صاحبي، اكتب كتابة'); return; }
   let Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
   let rec = new Rec(); rec.lang='ar-EG'; rec.interimResults=false;
-  btn.classList.add('active'); btn.textContent='🔴';
-  rec.onresult = (e)=>{ let t=e.results[0][0].transcript; input.value=t; btn.classList.remove('active'); btn.textContent='🎤'; sendMsg(); };
-  rec.onerror = ()=>{ btn.classList.remove('active'); btn.textContent='🎤'; };
-  rec.onend = ()=>{ btn.classList.remove('active'); btn.textContent='🎤'; };
+  btn.textContent='🔴';
+  rec.onresult = (e)=>{ let t=e.results[0][0].transcript; input.value=t; btn.textContent='🎤'; sendMsg(); };
+  rec.onerror = ()=>{ btn.textContent='🎤'; };
+  rec.onend = ()=>{ btn.textContent='🎤'; };
   rec.start();
 }
-
 async function sendMsg(){
-  let text=input.value.trim(); if(!text) return;
+  let text=input.value.trim();
+  if(!text){ input.focus(); return; }
   if(text.includes('اسمي') || text.includes('انا اسمي')){
     let n=text.replace('اسمي','').replace('انا','').trim().split(' ')[0];
     if(n){ myName=n; localStorage.setItem('dola_name',n); }
   }
-  addMsg(text,'user'); input.value=''; showTyping(); history.push(text);
+  addMsg(text,'user');
+  input.value='';
+  input.focus();
+  showTyping();
   let fast=smartReply(text);
   let isSaved = text.includes('عادل')||text.includes('عبد الحليم')||text.includes('عبدالحليم')||text.includes('حليم')||text.includes('سلام')||text.includes('ازيك')||text.includes('صباح')||text.includes('مساء')||text.includes('نكتة');
   if(isSaved){ setTimeout(()=>{removeTyping(); addMsg(fast,'ai')},600); return; }
-  if(text.includes('ارسم')||text.includes('صورة')||text.includes('صوره')||text.includes('imagine')){
+  if(text.includes('ارسم')||text.includes('صورة')||text.includes('صوره')){
     removeTyping();
     let prompt=text.replace('ارسم لي','').replace('ارسم','').replace('صورة','').replace('صوره','').trim() || 'بطل خارق';
     let imgUrl='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt+', high quality, beautiful, detailed')+'?width=512&height=512&nologo=true';
     let div=document.createElement('div'); div.className='msg ai';
-    div.innerHTML='<small>💜 DOLA AI PRO</small>عملتلك الصورة يا '+myName+' 🎨🔥<br><img src="'+imgUrl+'" onerror="this.outerHTML=\'معلش الصورة ماتحملتش، جرب تاني\'"><br>عايز صورة تانية؟ قولي ارسم لي
+    div.innerHTML='<small>💜 DOLA AI PRO</small>عملتلك الصورة يا '+myName+' 🎨🔥<br><img src="'+imgUrl+'"><br>عايز صورة تانية؟ قولي ارسم لي كذا';
+    chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
+    return;
+  }
+  let m=tryMath(text);
+  if(m){ setTimeout(()=>{removeTyping(); addMsg(m,'ai')},400); return; }
+  let ans=await askAI(text);
+  removeTyping();
+  if(!ans || ans.length<5){ ans = fast || genericArabicReply(text); }
+  let enCount=(ans.match(/[a-zA-Z]/g)||[]).length;
+  if(enCount>30 && !ans.includes('wa.me')){ ans = genericArabicReply(text); }
+  addMsg(ans.slice(0,2000),'ai');
+}
+function addMsg(t,type){ let d=document.createElement('div'); d.className='msg '+type; if(type==='ai') d.innerHTML='<small>💜 DOLA AI PRO</small>'+t; else d.textContent=t; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
+function showTyping(){ let t=document.createElement('div'); t.className='typing'; t.id='typing'; t.innerHTML='<span></span><span></span><span></span>'; chat.appendChild(t); chat.scrollTop=chat.scrollHeight; }
+function removeTyping(){ let t=document.getElementById('typing'); if(t) t.remove(); }
+function tryMath(q){ let c=q.replace(/ /g,'').replace(/×/g,'*').replace(/÷/g,'/').replace(/x/g,'*'); if(/^[0-9+\-*/().]+$/.test(c)&&c.length>2&&c.length<20){ try{ return '🧮 يا صاحبي الناتج = '+eval(c)+' 😎'; }catch(e){return null} } return null; }
+function addCalc(v){ document.getElementById('calcInput').value+=v; }
+function solveCalc(){ let v=document.getElementById('calcInput').value; try{ let r=eval(v.replace(/×/g,'*').replace(/÷/g,'/')); document.get
