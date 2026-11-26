@@ -8,14 +8,15 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial;background:#050005;color:#fff;display:flex;flex-direction:column;height:100dvh}
 .top{padding:12px;display:flex;gap:10px;align-items:center;background:#000;border-bottom:2px solid #a855f7}
-.top b{font-size:20px}.top b span{color:#a855f7}
+.top b{font-size:20px}
+.top b span{color:#a855f7}
 .tabs{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#0a0a0a}
 .tabs button{white-space:nowrap;padding:10px 14px;border-radius:20px;border:1px solid #333;background:#111;color:#fff;font-weight:700}
 .tabs button.active{background:#a855f7}
 .section{display:none;flex:1;flex-direction:column;overflow:hidden}
 .section.active{display:flex}
 .chat{flex:1;overflow-y:auto;padding:12px 12px 110px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:92%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.7;white-space:pre-wrap}
+.msg{max-width:90%;padding:12px 14px;border-radius:16px;font-size:16px;line-height:1.7;white-space:pre-wrap}
 .msg.ai{background:#1a0b2e;border:1px solid #a855f7;align-self:flex-start}
 .msg.user{background:#a855f7;align-self:flex-end}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:8px}
@@ -23,7 +24,7 @@ body{margin:0;font-family:Arial;background:#050005;color:#fff;display:flex;flex-
 .bottom{position:fixed;bottom:8px;left:8px;right:8px;display:flex;gap:8px;padding:6px;background:#111;border:2px solid #a855f7;border-radius:30px;max-width:700px;margin:auto;z-index:999}
 .bottom input{flex:1;padding:14px;border:none;border-radius:22px;background:#1a1a1a;color:#fff;font-size:16px;outline:none;min-width:0}
 .sendBtn{height:48px;padding:0 20px;border-radius:25px;border:none;background:#a855f7;color:#fff;font-weight:900;font-size:16px}
-.waBtn{display:block;margin-top:10px;background:#25D366;color:#fff;text-align:center;padding:10px;border-radius:14px;text-decoration:none;font-weight:900;font-size:14px}
+.micBtn{width:48px;height:48px;border-radius:50%;border:none;background:#2a2a2a;color:#fff;font-size:20px}
 .other{padding:12px;overflow-y:auto;flex:1}
 .card{background:#150a26;border:1px solid #a855f7;border-radius:14px;padding:12px;margin:10px 0}
 .card textarea,.card input{width:100%;padding:12px;border-radius:12px;background:#111;color:#fff;border:1px solid #a855f7;margin-top:8px}
@@ -51,7 +52,7 @@ body{margin:0;font-family:Arial;background:#050005;color:#fff;display:flex;flex-
 <button onclick="quickSend('قولي نكتة')">😂 نكتة</button>
 </div>
 <div class="chat" id="chat">
-<div class="msg ai">اهلا يا صاحبي 👑🔥 انا DOLA AI PRO - اكتب تحت ودوس إرسال وهرد عليك على طول 💜<br><br>ولو عايز رسالتك توصل لعادل نفسه، دوس على زرار الواتساب اللي هيظهر تحت رسالتك 📩</div>
+<div class="msg ai">اهلا يا صاحبي 👑🔥 انا DOLA AI PRO - اكتب تحت ودوس إرسال وهرد عليك على طول 💜</div>
 </div>
 </div>
 
@@ -59,7 +60,7 @@ body{margin:0;font-family:Arial;background:#050005;color:#fff;display:flex;flex-
 
 <div class="section" id="makeTab"><div class="other"><div class="card"><h3>✍️ اعملي أي حاجة</h3><textarea id="makeText" placeholder="اكتب لي قصة - موضوع تعبير - بوست - شعر"></textarea><button class="btn" onclick="doMake()">اعملي ده ✨</button><div class="result" id="makeResult">هنا هيظهر اللي عملته</div></div></div></div>
 
-<div class="section" id="chargeTab"><div class="other"><div class="card" style="text-align:center"><h3>💎 شحن جواهر فري فاير</h3><p>مع عادل الملك 👑</p><p style="font-size:22px;font-weight:900">📞 01062056341</p><a href="https://wa.me/201062056341" style="display:block;background:#25D366;color:#fff;padding:14px;border-radius:20px;text-decoration:none;font-weight:900">💬 كلم عادل واتساب واشحن دلوقتي</a></div></div></div>
+<div class="section" id="chargeTab"><div class="other"><div class="card" style="text-align:center"><h3>💎 شحن جواهر فري فاير</h3><p>مع عادل الملك 👑</p><p style="font-size:22px;font-weight:900">📞 01062056341</p><a href="https://wa.me/201062056341" style="display:block;background:#a855f7;color:#fff;padding:14px;border-radius:20px;text-decoration:none;font-weight:900">💬 كلم عادل واتساب</a></div></div></div>
 
 <div class="bottom" id="bottomBar">
 <input id="input" placeholder="اكتب رسالتك هنا..." autocomplete="off">
@@ -67,6 +68,7 @@ body{margin:0;font-family:Arial;background:#050005;color:#fff;display:flex;flex-
 </div>
 
 <script>
+// ===== ده أهم جزء - رسالتك بتتبعت فورا =====
 function showTab(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -74,15 +76,18 @@ function showTab(id,btn){
   btn.classList.add('active');
   document.getElementById('bottomBar').style.display = (id==='chatTab') ? 'flex' : 'none';
 }
-function quickSend(t){ document.getElementById('input').value = t; sendMsg(); }
+function quickSend(t){
+  document.getElementById('input').value = t;
+  sendMsg();
+}
 function addMsg(text, type){
   var chat = document.getElementById('chat');
   var d = document.createElement('div');
   d.className = 'msg ' + type;
-  d.innerHTML = text;
+  d.textContent = text;
+  if(type==='ai') d.innerHTML = text;
   chat.appendChild(d);
   chat.scrollTop = chat.scrollHeight;
-  return d;
 }
 function getReply(q){
   var l = q.toLowerCase();
@@ -93,8 +98,8 @@ function getReply(q){
   if(l.indexOf('صباح')!==-1) return 'صباح الفل يا صاحبي ☀️💜 يومك هيبقى جامد النهارده 👑';
   if(l.indexOf('مساء')!==-1 || l.indexOf('مسا')!==-1) return 'مساء الجمال يا صاحبي 🌙💜 عامل ايه؟';
   if(l.indexOf('نكتة')!==-1 || l.indexOf('ضحكني')!==-1) return 'اسمع دي 😂 واحد محشش قاله صاحبه انت فين؟ قاله في البيت، قاله طب تعالا، قاله ما انا في البيت 😂😂';
-  if(l.indexOf('اغاني')!==-1) return '🕌 بص يا صاحبي، الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام، والأغاني الهادية اللي كلامها نضيف عادي. نصيحتي اسمع قرآن هترتاح أكتر 💜';
-  if(l.indexOf('حرام')!==-1 || l.indexOf('حلال')!==-1) return 'بص يا صاحبي، لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال 💜';
+  if(l.indexOf('اغاني')!==-1 || l.indexOf('الاغاني')!==-1) return '🕌 بص يا صاحبي، الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام، والأغاني الهادية اللي كلامها نضيف عادي. نصيحتي اسمع قرآن هترتاح أكتر 💜';
+  if(l.indexOf('حرام')!==-1 || l.indexOf('حلال')!==-1) return 'بص يا صاحبي، لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال 💜 قولي الحاجة بالظبط وانا اقولك';
   if(l.indexOf('شحن')!==-1 || l.indexOf('جواهر')!==-1) return '💎 عايز تشحن؟ كلم عادل الملك 📞 01062056341 https://wa.me/201062056341';
   if(l.indexOf('فري فاير')!==-1 || l.indexOf('ببجي')!==-1) return '🎮 فري فاير لعبة جامدة، العبها ساعة للمتعة وصلي صلاتك وذاكر، ولو عايز تشحن كلم عادل 01062056341';
   if(l.indexOf('قصة')!==-1) return 'كان يا ما كان، كان فيه بطل اسمه عادل 👑 كان جدع وشجاع، وكل الناس بتحبه، وقرر يعمل موقع ذكاء صناعي عشان يساعد كل الناس، ونجح وبقى ملك الملوك 🔥';
@@ -108,7 +113,8 @@ function getReply(q){
 }
 async function getAIReply(q){
   try{
-    var r = await fetch('https://text.pollinations.ai/' + encodeURIComponent('رد بالعربي المصري فقط، ممنوع انجليزي، رد باختصار: ' + q));
+    var prompt = 'انت DOLA AI PRO، رد بالعربي المصري فقط، ممنوع انجليزي، رد باختصار وبحب: ' + q;
+    var r = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
     var t = await r.text();
     if(t && t.length>5) return t;
   }catch(e){}
@@ -118,29 +124,46 @@ function sendMsg(){
   var input = document.getElementById('input');
   var text = input.value.trim();
   if(!text) { input.focus(); return; }
-  // رسالتك بتظهر فورا
-  var userDiv = addMsg(text, 'user');
-  // زرار يبعت رسالتك لعادل على الواتساب - دي اللي هتوصلك انت
-  var waLink = 'https://wa.me/201062056341?text=' + encodeURIComponent('رسالة من موقع DOLA AI PRO: ' + text);
-  userDiv.innerHTML = text + '<a class="waBtn" href="'+waLink+'" target="_blank">📩 ابعت رسالتك دي لعادل واتساب</a>';
+  // 1 - رسالتك بتتبعت فورا - دي أهم خطوة
+  addMsg(text, 'user');
   input.value = '';
   input.focus();
+  // 2 - لو رسم صورة
   if(text.indexOf('ارسم')!==-1 || text.indexOf('صورة')!==-1 || text.indexOf('صوره')!==-1){
     var p = text.replace('ارسم لي','').replace('ارسم','').replace('صورة','').replace('صوره','').trim() || 'بطل خارق';
-    addMsg('عملتلك الصورة يا صاحبي 🎨🔥<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(p)+'?width=512&height=512&nologo=true" style="width:100%;border-radius:12px;margin-top:8px">', 'ai');
+    var div = document.createElement('div');
+    div.className = 'msg ai';
+    div.innerHTML = 'عملتلك الصورة يا صاحبي 🎨🔥<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(p)+'?width=512&height=512&nologo=true" style="width:100%;border-radius:12px;margin-top:8px">';
+    document.getElementById('chat').appendChild(div);
+    document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
     return;
   }
+  // 3 - رد سريع محفوظ
   var fast = getReply(text);
-  if(fast){ setTimeout(function(){ addMsg(fast, 'ai'); }, 500); return; }
-  var typing = addMsg('...', 'ai');
+  if(fast){
+    setTimeout(function(){ addMsg(fast, 'ai'); }, 500);
+    return;
+  }
+  // 4 - جرب الذكاء الصناعي، ولو فشل رد برد عربي عام
+  addMsg('...', 'ai');
+  var typingMsg = document.querySelectorAll('.msg.ai');
+  var lastTyping = typingMsg[typingMsg.length-1];
   getAIReply(text).then(function(ans){
-    if(!ans || ans.length<5) ans = 'فهمتك يا صاحبي 💜👑 انت بتقول "' + text + '" - كلامك صح، وانا معاك. قولي عايزني اشرحلك أكتر؟ ولا اعملك قصة؟ ولا ارسم لك صورة؟ انا معاك في أي حاجة 😎';
+    if(!ans || ans.length<5){
+      ans = 'فهمتك يا صاحبي 💜👑 انت بتقول "' + text + '" - كلامك صح، وانا معاك. قولي عايزني اشرحلك أكتر؟ ولا اعملك قصة؟ ولا ارسم لك صورة؟ انا معاك في أي حاجة 😎';
+    }
+    // لو الرد فيه انجليزي كتير، بدلها برد عربي
     var en = (ans.match(/[a-zA-Z]/g)||[]).length;
-    if(en>30 && ans.indexOf('wa.me')===-1) ans = 'فهمتك يا صاحبي 💜👑 انت بتقول "' + text + '" - الموضوع ده مهم، ولازم تفكر فيه بهدوء، وتصلي وتدعي ربنا يوفقك.';
-    typing.innerHTML = ans.slice(0,2000);
+    if(en>30 && ans.indexOf('wa.me')===-1){
+      ans = 'فهمتك يا صاحبي 💜👑 انت بتقول "' + text + '" - الموضوع ده مهم، ولازم تفكر فيه بهدوء، وتصلي وتدعي ربنا يوفقك. قولي عايزني اعملك ايه بالظبط؟';
+    }
+    lastTyping.innerHTML = ans.slice(0,2000);
   });
 }
-document.getElementById('input').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); sendMsg(); } });
+// Enter بيبعت برضه
+document.getElementById('input').addEventListener('keydown', function(e){
+  if(e.key==='Enter'){ e.preventDefault(); sendMsg(); }
+});
 function doImg(){
   var t = document.getElementById('imgText').value.trim();
   if(!t) return;
@@ -151,7 +174,7 @@ async function doMake(){
   if(!t) return;
   document.getElementById('makeResult').textContent = 'بعملهولك... ⏳';
   var r = await getAIReply(t);
-  document.getElementById('makeResult').textContent = r || 'عملتلك اللي طلبته يا صاحبي 💜 ' + t;
+  document.getElementById('makeResult').textContent = r || getReply(t) || 'عملتلك اللي طلبته يا صاحبي 💜 ' + t;
 }
 </script>
 </body>
