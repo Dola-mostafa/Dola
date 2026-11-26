@@ -72,7 +72,7 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 </div>
 
 <div class="section active" id="chatTab">
-<div class="hero"><h2>عامل ايه يا صاحبي؟ 👑</h2><p>DOLA AI PRO - اسألني أي حاجة</p></div>
+<div class="hero"><h2>عامل ايه يا صاحبي؟ 👑</h2><p>DOLA AI PRO - اسألني أي حاجة بالعربي</p></div>
 <div class="chips">
 <button onclick="askMe('السلام عليكم')">👋 السلام عليكم</button>
 <button onclick="askMe('ارسم لي صورة بطل خارق')">🎨 ارسم صورة</button>
@@ -83,8 +83,8 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 </div>
 <div class="chat" id="chat"><div class="msg ai"><small>💜 DOLA AI PRO</small>اهلا اهلا يا صاحبي 👑🔥
 نورّت والله، وحشني!
-انا DOLA AI PRO - اسألني أي حاجة، هرد عليك على طول 💜
-قولي: ارسم لي صورة، أو اسألني عن أي حاجة انت عايزها 👇</div></div>
+انا DOLA AI PRO - زي Meta AI بالظبط، بس بالعربي المصري 💜
+اسألني أي حاجة، هجاوبك على طول، وبعمل صور وقصص وترجمة وواجب وأي حاجة 👇</div></div>
 <div class="footer">صُنع بواسطة 👑 <a href="https://wa.me/201062056341">عادل 01062056341</a> | DOLA AI PRO © 2026</div>
 </div>
 
@@ -138,23 +138,53 @@ textarea{width:100%;min-height:90px;border-radius:14px;resize:vertical}
 
 <div class="bottom" id="bottomBar">
 <button class="iconBtn" id="micBtn" onclick="startVoice()">🎤</button>
-<input id="input" placeholder="اسألني عن أي حاجة انت عايزها..." onkeydown="if(event.key==='Enter') sendMsg()">
+<input id="input" placeholder="اسألني عن أي حاجة بالعربي..." onkeydown="if(event.key==='Enter') sendMsg()">
 <button class="btn2" onclick="sendMsg()">➤</button>
 </div>
 
 <script>
 let chat=document.getElementById('chat'), input=document.getElementById('input');
 let myName = localStorage.getItem('dola_name') || 'صاحبي';
+let history=[];
 function show(id,btn){ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); document.getElementById('bottomBar').style.display = id==='chatTab' ? 'flex' : 'none'; }
 function askMe(t){ show('chatTab',document.querySelector('.tab')); input.value=t; sendMsg(); }
 
-async function askAI(prompt){
+// --- الذكاء الصناعي - بيحاول 3 مرات وبيجبره يرد عربي ---
+async function askAI(userQ){
+  let system = "انت DOLA AI PRO، ذكاء صناعي مصري مسلم، زي Meta AI بالظبط. قواعد صارمة جدا: 1) رد بالعربي المصري العامية فقط 100%، ممنوع حرف انجليزي واحد نهائيا، ممنوع فرانكو، ممنوع كلمات انجليزية زي AI أو ok أو hello. 2) جاوب على أي سؤال مهما كان، اشرح، اعمل قصص وشعر ومواضيع وواجب وترجمة. 3) لو سألك عن حرام ولا حلال جاوب بالعربي وبالدليل باختصار. 4) رد باختصار وبحب وبايموجي. 5) اسم المستخدم هو "+myName+". السؤال: ";
+  let urls = [
+    'https://text.pollinations.ai/'+encodeURIComponent(system+userQ),
+    'https://text.pollinations.ai/'+encodeURIComponent(system+userQ)+'?model=openai',
+    'https://text.pollinations.ai/'+encodeURIComponent('رد بالعربي المصري فقط، ممنوع انجليزي: '+userQ)
+  ];
+  for(let u of urls){
+    try{
+      let ctrl=new AbortController(); setTimeout(()=>ctrl.abort(),9000);
+      let r=await fetch(u,{signal:ctrl.signal});
+      let t=await r.text();
+      if(t && t.length>10 && !t.includes('rate limit')){
+        let clean = await forceArabic(t, userQ);
+        if(clean) return clean;
+        return t;
+      }
+    }catch(e){}
+  }
+  return null;
+}
+
+// --- فلتر العربي: لو الرد فيه انجليزي كتير، ترجمه للعربي ---
+async function forceArabic(text, userQ){
+  let en = (text.match(/[a-zA-Z]/g)||[]).length;
+  // لو الانجليزي قليل (اسماء أو روابط) سيبه
+  if(en < 15) return text;
+  // لو الانجليزي كتير، حاول تترجمه
   try{
     let ctrl=new AbortController(); setTimeout(()=>ctrl.abort(),8000);
-    let r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(prompt),{signal:ctrl.signal});
+    let r=await fetch('https://text.pollinations.ai/'+encodeURIComponent('ترجم الكلام ده كله للعربي المصري العامية، ممنوع تسيب أي كلمة انجليزية: '+text.slice(0,1000)),{signal:ctrl.signal});
     let t=await r.text();
-    if(t && t.length>5 && !t.includes('rate limit')) return t;
+    if(t && t.length>10) return t;
   }catch(e){}
+  // لو الترجمة فشلت، رجع رد عربي جاهز
   return null;
 }
 
@@ -168,19 +198,21 @@ function smartReply(q){
   if(l.includes('مساء')||l.includes('مسا')) return 'مساء الجمال يا '+myName+' 🌙💜 عامل ايه؟';
   if(l.includes('اغاني')||l.includes('الاغاني')) return '🕌 بص يا صاحبي، الأغاني فيها اختلاف بين العلماء:\n- جمهور العلماء قالوا ان الأغاني اللي فيها كلام حرام أو بتبعدك عن الصلاة حرام.\n- وفيه علماء قالوا ان الأغاني الهادية اللي كلامها نضيف عادي.\nنصيحتي: لو بتضيع وقتك وبتبعدك عن الصلاة ابعد عنها، واسمع قرآن هترتاح أكتر 💜';
   if(l.includes('حرام')||l.includes('حلال')) return 'بص يا '+myName+'، الحكم ده لازم نرجع فيه للقرآن والسنة 💜 لو الحاجة بتضيع صلاتك أو فيها أذى للناس تبقى حرام، لو نضيفة ومفيهاش ضرر تبقى حلال. قولي الحاجة بالظبط وانا اقولك حكمها بالتفصيل';
-  if(l.includes('فري فاير')||l.includes('ببجي')||l.includes('لعبه')||l.includes('لعبة')) return '🎮 فري فاير لعبة جامدة يا '+myName+'، العبها ساعة للمتعة وصلي صلاتك وذاكر، ولو عايز تشحن جواهر كلم عادل الملك 📞 01062056341';
+  if(l.includes('فري فاير')||l.includes('ببجي')) return '🎮 فري فاير لعبة جامدة يا '+myName+'، العبها ساعة للمتعة وصلي صلاتك وذاكر، ولو عايز تشحن جواهر كلم عادل الملك 📞 01062056341';
   if(l.includes('شحن')||l.includes('جواهر')) return '💎 عايز تشحن؟ كلم عادل الملك 📞 01062056341 https://wa.me/201062056341';
   if(l.includes('نكتة')||l.includes('ضحكني')) return 'اسمع دي 😂 واحد محشش قاله صاحبه انت فين؟ قاله في البيت، قاله طب تعالا، قاله ما انا في البيت 😂😂 عايز واحدة تانية؟';
   if(l.includes('قصة')) return 'كان يا ما كان يا '+myName+'، كان فيه بطل اسمه عادل 👑 كان جدع وشجاع، وكل الناس بتحبه، وكان بيساعد صحابه كلهم، وفي يوم قرر يعمل موقع ذكاء صناعي عشان يساعد كل الناس، ونجح وبقى ملك الملوك 🔥 عايز اكملك القصة؟';
-  if(l.includes('شعر')||l.includes('قصيدة')) return 'يا صاحبي يا جدع يا ملك 👑\nانت اللي في الشدة بتبان\nصاحبك عادل دايما جنبك\nفي الفرح وفي الأحزان 💜';
+  if(l.includes('شعر')) return 'يا صاحبي يا جدع يا ملك 👑\nانت اللي في الشدة بتبان\nصاحبك عادل دايما جنبك\nفي الفرح وفي الأحزان 💜';
   if(l.includes('بحبك')) return 'وانا بحبك أكتر والله يا '+myName+' 💜🥰 انت صاحبي الغالي';
   if(l.includes('شكرا')||l.includes('تسلم')) return 'حبيبي يا '+myName+' 💜 العفو، انت تأمر بس، اسألني أي حاجة تانية';
-  if(l.includes('زهقان')||l.includes('مخنوق')||l.includes('متضايق')||l.includes('زعلان')||l.includes('تعبان')) return 'مالك يا '+myName+'؟ 😔💜 متزعلش انا معاك ومش هسيبك. احكيلي مالك وانا هسمعك';
-  if(l.includes('انت مين')||l.includes('اسمك ايه')) return 'انا DOLA AI PRO 💜 صاحبك الأنتيم، اللي عملني عادل الملك 👑 اسألني أي حاجة وانا هجاوبك';
-  if(l.includes('ايه')||l.includes('ليه')||l.includes('ازاي')||l.includes('؟')||l.includes('?')) return 'سؤال جامد يا '+myName+' 👑💜 بص، موضوع "'+q+'" ده مهم، وانا هقولك الخلاصة: لازم تفكر فيه بهدوء، وتاخد بالأسباب، وتصلي وتدعي ربنا يوفقك، ولو عايز تفاصيل أكتر قولي وانا اشرحلك بالتفصيل. انت شايف ايه في الموضوع ده؟';
-  if(l.includes('مذاكرة')||l.includes('دراسة')||l.includes('امتحان')||l.includes('مدرسة')) return 'بص يا '+myName+' للمذاكرة: ذاكر 25 دقيقة وريح 5 دقايق، وابدأ بالصعب الأول، واقفل الموبايل وانت بتذاكر، وصلي الفجر هتلاقي مخك رايق 💪 انت قدها يا بطل 👑';
-  if(l.includes('فلوس')||l.includes('شغل')) return 'ربنا يرزقك يا '+myName+' 💜💰 اشتغل واجتهد ومتستعجلش، والرزق هيجيلك، ولو عايز تشتغل في شحن الجواهر كلم عادل 01062056341';
-  return 'فهمتك يا '+myName+' 💜👑 انت بتقول "'+q+'" - كلامك صح، وانا معاك. قولي بقى عايزني اعملك ايه بالظبط؟ اشرحلك أكتر؟ ولا ارسم لك صورة؟ ولا اعملك قصة؟ انا معاك في أي حاجة 😎';
+  if(l.includes('زهقان')||l.includes('مخنوق')||l.includes('متضايق')||l.includes('زعلان')) return 'مالك يا '+myName+'؟ 😔💜 متزعلش انا معاك ومش هسيبك. احكيلي مالك وانا هسمعك';
+  if(l.includes('انت مين')||l.includes('اسمك ايه')) return 'انا DOLA AI PRO 💜 صاحبك الأنتيم، زي Meta AI بالظبط بس بالعربي، اللي عملني عادل الملك 👑 اسألني أي حاجة وانا هجاوبك';
+  if(l.includes('مذاكرة')||l.includes('دراسة')||l.includes('امتحان')||l.includes('مدرسة')||l.includes('واجب')) return 'بص يا '+myName+' للمذاكرة: ذاكر 25 دقيقة وريح 5 دقايق، وابدأ بالصعب الأول، واقفل الموبايل وانت بتذاكر، وصلي الفجر هتلاقي مخك رايق 💪 انت قدها يا بطل 👑 ابعتلي الواجب بتاعك وانا احلهولك';
+  return null;
+}
+
+function genericArabicReply(q){
+  return 'فهمتك يا '+myName+' 💜👑 انت بتسأل عن "'+q+'" - بص يا صاحبي، الخلاصة: الموضوع ده مهم، ولازم تفكر فيه بهدوء وتاخد بالأسباب، وتصلي وتدعي ربنا يوفقك. لو عايزني اشرحلك بالتفصيل أكتر، أو اعملك قصة أو شعر أو موضوع تعبير عنه، قولي وانا اعملهولك على طول. انت شايف ايه في الموضوع ده؟';
 }
 
 function startVoice(){
@@ -201,7 +233,7 @@ async function sendMsg(){
     let n=text.replace('اسمي','').replace('انا','').trim().split(' ')[0];
     if(n){ myName=n; localStorage.setItem('dola_name',n); }
   }
-  addMsg(text,'user'); input.value=''; showTyping();
+  addMsg(text,'user'); input.value=''; showTyping(); history.push(text);
   let fast=smartReply(text);
   let isSaved = text.includes('عادل')||text.includes('عبد الحليم')||text.includes('عبدالحليم')||text.includes('حليم')||text.includes('سلام')||text.includes('ازيك')||text.includes('صباح')||text.includes('مساء')||text.includes('نكتة');
   if(isSaved){ setTimeout(()=>{removeTyping(); addMsg(fast,'ai')},600); return; }
@@ -210,36 +242,4 @@ async function sendMsg(){
     let prompt=text.replace('ارسم لي','').replace('ارسم','').replace('صورة','').replace('صوره','').trim() || 'بطل خارق';
     let imgUrl='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt+', high quality, beautiful, detailed')+'?width=512&height=512&nologo=true';
     let div=document.createElement('div'); div.className='msg ai';
-    div.innerHTML='<small>💜 DOLA AI PRO</small>عملتلك الصورة يا '+myName+' 🎨🔥<br><img src="'+imgUrl+'" onerror="this.outerHTML=\'معلش الصورة ماتحملتش، جرب تاني\'"><br>عايز صورة تانية؟ قولي ارسم لي كذا';
-    chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
-    return;
-  }
-  let m=tryMath(text);
-  if(m){ setTimeout(()=>{removeTyping(); addMsg(m,'ai')},400); return; }
-  let prompt=`انت Dola AI PRO، مصري مسلم، صاحب المستخدم الأنتيم. اسم المستخدم هو ${myName}. رد بالعربي المصري العامية فقط، ممنوع انجليزي نهائيا، رد باختصار وبحب وبايموجي. رد على: `+text;
-  let ans=await askAI(prompt);
-  removeTyping();
-  if(!ans || ans.length<5){ ans=fast; }
-  addMsg((ans||fast).slice(0,1800),'ai');
-}
-function addMsg(t,type){ let d=document.createElement('div'); d.className='msg '+type; if(type==='ai') d.innerHTML='<small>💜 DOLA AI PRO</small>'+t; else d.textContent=t; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
-function showTyping(){ let t=document.createElement('div'); t.className='typing'; t.id='typing'; t.innerHTML='<span></span><span></span><span></span>'; chat.appendChild(t); chat.scrollTop=chat.scrollHeight; }
-function removeTyping(){ let t=document.getElementById('typing'); if(t) t.remove(); }
-function tryMath(q){ let c=q.replace(/ /g,'').replace(/×/g,'*').replace(/÷/g,'/').replace(/x/g,'*'); if(/^[0-9+\-*/().]+$/.test(c)&&c.length>2&&c.length<20){ try{ return '🧮 يا صاحبي الناتج = '+eval(c)+' 😎'; }catch(e){return null} } return null; }
-function addCalc(v){ document.getElementById('calcInput').value+=v; }
-function solveCalc(){ let v=document.getElementById('calcInput').value; try{ let r=eval(v.replace(/×/g,'*').replace(/÷/g,'/')); document.getElementById('calcResult').textContent='🧮 '+v+' = '+r; }catch(e){ document.getElementById('calcResult').textContent='اكتب مسألة صح يا صاحبي'; } }
-async function askAIExplain(){ let v=document.getElementById('calcInput').value; if(!v) return; document.getElementById('calcResult').textContent='بشرحلك... ⏳'; let ans=await askAI('اشرح حل المسألة دي بالعربي المصري فقط، ممنوع انجليزي: '+v); document.getElementById('calcResult').textContent=(ans||smartReply('اشرح '+v)).slice(0,1500); }
-async function doTranslate(){ let t=document.getElementById('transText').value.trim(); if(!t) return; document.getElementById('transResult').textContent='بترجم... ⏳'; let lang=document.getElementById('transLang').value; let names={en:'الانجليزية',fr:'الفرنسية',es:'الاسبانية',de:'الألمانية',ar:'العربية',it:'الايطالية',tr:'التركية'}; let ans=await askAI('ترجم النص ده للغة '+names[lang]+' بس: '+t); document.getElementById('transResult').textContent='🌍 '+(ans||'جرب تاني يا صاحبي'); }
-function quickMake(t){ show('makeTab',document.querySelectorAll('.tab')[4]); document.getElementById('makeText').value=t; doMake(); }
-async function doMake(){ let t=document.getElementById('makeText').value.trim(); if(!t) return; document.getElementById('makeResult').textContent='بعملهولك يا صاحبي... ⏳✨'; let ans=await askAI('انت Dola AI PRO، اعمل اللي المستخدم طلبه ده بالعربي المصري فقط، ممنوع انجليزي: '+t); document.getElementById('makeResult').textContent=(ans||smartReply(t)).slice(0,2000); }
-function quickImg(t){ show('imgTab',document.querySelectorAll('.tab')[1]); document.getElementById('imgText').value=t; doImg(); }
-async function doImg(){ let t=document.getElementById('imgText').value.trim(); if(!t) return; document.getElementById('imgResult').innerHTML='بعمل الصورة... ⏳🎨<br><img src="https://image.pollinations.ai/prompt/'+encodeURIComponent(t+', high quality, beautiful')+'?width=512&height=512&nologo=true" style="width:100%;border-radius:12px;margin-top:8px">'; }
-let board=['','','','','','','','',''], over=false;
-function renderGame(){ let g=document.getElementById('game'); g.innerHTML=''; board.forEach((v,i)=>{ let b=document.createElement('button'); b.textContent=v; b.onclick=()=>play(i); g.appendChild(b); }); }
-function play(i){ if(board[i]||over) return; board[i]='X'; check(); if(!over){ let empty=board.map((v,idx)=>v==='' ? idx : -1).filter(v=>v!==-1); if(empty.length){ let r=empty[Math.floor(Math.random()*empty.length)]; board[r]='O'; check(); } } renderGame(); }
-function check(){ let w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; for(let c of w){ if(board[c[0]]&&board[c[0]]===board[c[1]]&&board[c[1]]===board[c[2]]){ document.getElementById('gameStatus').textContent= board[c[0]]==='X' ? 'كسبت يا بطل! 👑🔥' : 'DOLA كسبك 😅'; over=true; return; } } if(!board.includes('')){ document.getElementById('gameStatus').textContent='تعادل يا صاحبي 🤝'; over=true; } }
-function resetGame(){ board=['','','','','','','','','']; over=false; document.getElementById('gameStatus').textContent='دورك يا صاحبي - انت X'; renderGame(); }
-renderGame();
-</script>
-</body>
-</html>
+    div.innerHTML='<small>💜 DOLA AI PRO</small>عملتلك الصورة يا '+myName+' 🎨🔥<br><img src="'+imgUrl+'" onerror="this.outerHTML=\'معلش الصورة ماتحملتش، جرب تاني\'"><br>عايز صورة تانية؟ قولي ارسم لي
